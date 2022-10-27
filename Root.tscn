@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Root.gd" type="Script" id=1]
+[ext_resource path="res://yellow.png" type="Texture" id=2]
+[ext_resource path="res://glass.png" type="Texture" id=3]
+[ext_resource path="res://Bar.gd" type="Script" id=4]
+[ext_resource path="res://waterdrop.png" type="Texture" id=5]
+[ext_resource path="res://Water.gd" type="Script" id=6]
+
+[sub_resource type="PhysicsMaterial" id=3]
+friction = 0.14
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 20.0
+
+[node name="Root" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Bar" type="RigidBody2D" parent="."]
+position = Vector2( 360, 1064 )
+scale = Vector2( 8.745, 0.625 )
+mode = 3
+physics_material_override = SubResource( 3 )
+gravity_scale = 15.0
+linear_damp = 0.0
+angular_damp = 0.0
+script = ExtResource( 4 )
+
+[node name="Icon" type="Sprite" parent="Bar"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bar"]
+shape = SubResource( 1 )
+
+[node name="Glass" type="RigidBody2D" parent="."]
+position = Vector2( 351, 1040 )
+mass = 10.0
+gravity_scale = 24.37
+linear_damp = 0.0
+angular_damp = 0.0
+
+[node name="Icon" type="Sprite" parent="Glass"]
+position = Vector2( 0, -45 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Glass"]
+polygon = PoolVector2Array( -26, 4, 26, 4, 44, -93, -44, -93 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Water" type="RigidBody2D" parent="."]
+position = Vector2( 104, 219 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Water"]
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
